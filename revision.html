@@ -14,11 +14,23 @@
   </header>
 
   <main class="container">
+    <section class="tabs">
+      <button class="tab active" data-sport="tennis">🎾 Tennis</button>
+      <button class="tab" data-sport="beach_tennis">🏖️ Beach tennis</button>
+      <button class="tab" data-sport="all">Tout</button>
+    </section>
+
     <section class="tools row">
       <button id="randomBtn">10 questions au hasard</button>
       <button id="reviewBtn">Questions à revoir</button>
       <button id="resetBtn" class="ghost">Réinitialiser</button>
     </section>
+
+    <section class="question-stats">
+      <span id="revisionCount">Mode révision</span>
+      <span id="revisionSportLabel">Tennis</span>
+    </section>
+
     <section id="flashcard"></section>
   </main>
 
@@ -28,6 +40,7 @@
     <a href="questions.html">Questions</a>
     <a class="active" href="revision.html">Réviser</a>
   </nav>
+
   <script src="data/questions.js"></script>
   <script src="assets/app.js"></script>
 </body>
