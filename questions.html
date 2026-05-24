@@ -3,21 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Questions tennis — Révisions JAT1</title>
+  <title>Questions — Révisions JAT1</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <header class="page-head">
     <p class="kicker">Questions</p>
-    <h1>Questions tennis</h1>
-    <p>Filtre par thème, affiche la réponse quand tu veux.</p>
+    <h1>Questions JAT1</h1>
+    <p>Révise par discipline, par thème, et affiche la réponse seulement quand tu veux.</p>
   </header>
 
   <main class="container">
+    <section class="tabs">
+      <button class="tab active" data-sport="tennis">🎾 Tennis</button>
+      <button class="tab" data-sport="beach_tennis">🏖️ Beach tennis</button>
+    </section>
+
     <section class="tools">
       <input id="search" type="search" placeholder="Rechercher : service, filet, échauffement…" />
       <select id="themeFilter"></select>
     </section>
+
+    <section class="question-stats">
+      <span id="questionCount">0 question</span>
+      <span id="activeSportLabel">Tennis</span>
+    </section>
+
     <section id="questionList"></section>
   </main>
 
@@ -27,6 +38,7 @@
     <a class="active" href="questions.html">Questions</a>
     <a href="revision.html">Réviser</a>
   </nav>
+
   <script src="data/questions.js"></script>
   <script src="assets/app.js"></script>
 </body>
