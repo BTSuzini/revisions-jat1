@@ -1,42 +1,26 @@
 (function () {
-
   const header = document.createElement('header');
-  header.className = 'site-topbar';
+  header.className = 'clay-header';
 
   header.innerHTML = `
-    
-    <div class="topbar-overlay"></div>
-
-    <div class="topbar-inner">
-
+    <div class="clay-header__inner">
       <img 
-        src="assets/img/blason-suzini.png"
-        alt="Tennis Suzini"
-        class="topbar-logo"
+        src="assets/img/blason-suzini.png" 
+        alt="Tennis Suzini" 
+        class="clay-header__logo"
       >
 
-      <div class="topbar-center">
-
-        <div class="topbar-line"></div>
-
-        <div class="topbar-title">
-          Révisions JAT1
-        </div>
-
-        <div class="topbar-line"></div>
-
+      <div class="clay-header__title">
+        Révisions JAT1
       </div>
 
       <img 
-        src="assets/img/logo-lg.png"
-        alt="Arbitrage"
-        class="topbar-logo"
+        src="assets/img/logo-lg.png" 
+        alt="Arbitrage" 
+        class="clay-header__logo"
       >
-
     </div>
-
   `;
 
   document.body.prepend(header);
-
 })();
