@@ -182,6 +182,14 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(1.9rem,9vw,3.2rem);
 }
 
+.compact-head{
+  padding:14px 0 6px;
+}
+
+.compact-head .kicker{
+  margin-bottom:0;
+}
+
 .course-section{
   margin:18px 0;
 }
@@ -247,7 +255,16 @@ a{color:inherit;text-decoration:none}
 }
 
 .tools.row{
-  grid-template-columns:1fr;
+  display:flex;
+  gap:8px;
+}
+
+.tools.row button{
+  flex:1;
+  min-width:0;
+  padding:10px 4px;
+  font-size:.8rem;
+  white-space:nowrap;
 }
 
 .tools input,.tools select,button{
@@ -360,6 +377,56 @@ button.ghost{
   font-weight:700;
 }
 
+/* PAGE RÉVISION MOBILE */
+.revision-page .revision-main{
+  padding-top:10px;
+}
+
+.revision-page .compact-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr .7fr;
+  gap:7px;
+  overflow:visible;
+  padding-bottom:8px;
+}
+
+.revision-page .compact-tabs .tab{
+  min-width:0;
+  padding:9px 6px;
+  font-size:.86rem;
+  white-space:nowrap;
+}
+
+.revision-page .compact-tools{
+  display:flex;
+  gap:8px;
+  margin:4px 0 8px;
+}
+
+.revision-page .compact-tools button{
+  flex:1;
+  min-width:0;
+  min-height:40px;
+  padding:8px 4px;
+  border-radius:14px;
+  font-size:.78rem;
+  white-space:nowrap;
+}
+
+.revision-page .question-stats{
+  margin:4px 0 8px;
+  font-size:.82rem;
+}
+
+.revision-page .flash{
+  min-height:230px;
+  padding:16px;
+}
+
+.revision-page .flash .question{
+  font-size:1.12rem;
+}
+
 /* NAVIGATION BASSE */
 .bottom-nav{
   position:fixed;
@@ -418,6 +485,31 @@ button.ghost{
   }
 }
 
+@media(max-width:520px){
+  .revision-page .clay-header{
+    height:52px;
+  }
+
+  .revision-page .clay-header__inner{
+    grid-template-columns:38px 1fr 38px;
+  }
+
+  .revision-page .clay-header__logo{
+    width:34px;
+    height:34px;
+  }
+
+  .revision-page .clay-header__title{
+    font-size:.82rem;
+  }
+
+  .revision-page .clay-header__title::before,
+  .revision-page .clay-header__title::after{
+    width:20px;
+    margin:0 5px;
+  }
+}
+
 @media(min-width:720px){
   .home-grid{
     grid-template-columns:repeat(3,1fr);
@@ -428,6 +520,6 @@ button.ghost{
   }
 
   .tools.row{
-    grid-template-columns:repeat(3,1fr);
+    display:flex;
   }
 }
