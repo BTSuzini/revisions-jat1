@@ -1,25 +1,42 @@
 (function () {
+
   const header = document.createElement('header');
   header.className = 'site-topbar';
 
   header.innerHTML = `
-    <img 
-      src="assets/img/blason-suzini.png" 
-      alt="Tennis Suzini" 
-      class="topbar-logo"
-    >
+    
+    <div class="topbar-overlay"></div>
 
-    <div class="topbar-title">
-      <strong>Révisions JAT1</strong>
-      <span>Terre battue</span>
+    <div class="topbar-inner">
+
+      <img 
+        src="assets/img/blason-suzini.png"
+        alt="Tennis Suzini"
+        class="topbar-logo"
+      >
+
+      <div class="topbar-center">
+
+        <div class="topbar-line"></div>
+
+        <div class="topbar-title">
+          Révisions JAT1
+        </div>
+
+        <div class="topbar-line"></div>
+
+      </div>
+
+      <img 
+        src="assets/img/logo-lg.png"
+        alt="Arbitrage"
+        class="topbar-logo"
+      >
+
     </div>
 
-    <img 
-      src="assets/img/logo-lg.png" 
-      alt="Ligue Guyane Arbitrage" 
-      class="topbar-logo"
-    >
   `;
 
   document.body.prepend(header);
+
 })();
