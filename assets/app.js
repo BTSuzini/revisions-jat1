@@ -6,8 +6,19 @@ let deck = [];
 let idx = 0;
 
 const allQuestions = () => window.QUESTIONS || [];
-const loadProgress = () => JSON.parse(localStorage.getItem(storeKey) || '{}');
-const saveProgress = p => localStorage.setItem(storeKey, JSON.stringify(p));
+
+const loadProgress = () => {
+  try {
+    return JSON.parse(localStorage.getItem(storeKey) || '{}');
+  } catch {
+    return {};
+  }
+};
+
+const saveProgress = p => {
+  localStorage.setItem(storeKey, JSON.stringify(p));
+};
+
 const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
 
 function labelSport(sport) {
@@ -43,11 +54,13 @@ function bindTabs() {
 
       if (document.getElementById('questionList')) {
         activeSport = sport;
+
         const filter = document.getElementById('themeFilter');
         if (filter) {
           filter.dataset.ready = '';
           filter.innerHTML = '';
         }
+
         renderQuestions();
       }
 
@@ -63,7 +76,7 @@ function bindTabs() {
 
 function renderHome() {
   const el = document.getElementById('homeStats');
-  if (!el || !window.QUESTIONS) return;
+  if (!el) return;
 
   const p = loadProgress();
   const ok = Object.values(p).filter(v => v === 'ok').length;
@@ -104,9 +117,10 @@ function renderCourses() {
 function questionCard(item) {
   const p = loadProgress();
   const status = p[item.id];
+  const safeId = JSON.stringify(item.id);
 
   return `
-    <article class="card ${status === 'ok' ? 'status-ok' : ''} ${status === 'review' ? 'status-review' : ''}" data-theme="${item.theme}">
+    <article class="card ${status === 'ok' ? 'status-ok' : ''} ${status === 'review' ? 'status-review' : ''}" data-theme="${item.theme || ''}">
       <div class="q-meta">
         <span class="tag">${item.theme || 'Sans thème'}</span>
         <span class="tag">${labelSport(item.sport || 'tennis')}</span>
@@ -114,17 +128,17 @@ function questionCard(item) {
         ${status ? `<span class="tag">${status === 'ok' ? 'Maîtrisée' : 'À revoir'}</span>` : ''}
       </div>
 
-      <h3>${item.q}</h3>
+      <h3>${item.q || ''}</h3>
 
       <button class="ghost" onclick="this.nextElementSibling.classList.toggle('show')">
         Voir la réponse
       </button>
 
-      <div class="answer">${item.a}</div>
+      <div class="answer">${item.a || ''}</div>
 
       <div class="actions">
-        <button onclick="mark(${item.id}, 'ok')">Je savais</button>
-        <button class="secondary" onclick="mark(${item.id}, 'review')">À revoir</button>
+        <button onclick='mark(${safeId}, "ok")'>Je savais</button>
+        <button class="secondary" onclick='mark(${safeId}, "review")'>À revoir</button>
       </div>
     </article>
   `;
@@ -132,7 +146,7 @@ function questionCard(item) {
 
 function renderQuestions() {
   const list = document.getElementById('questionList');
-  if (!list || !window.QUESTIONS) return;
+  if (!list) return;
 
   const filter = document.getElementById('themeFilter');
   const search = document.getElementById('search');
@@ -141,7 +155,10 @@ function renderQuestions() {
 
   const source = getQuestionsBySport(activeSport);
 
-  const themes = ['Tous les thèmes', ...new Set(source.map(q => q.theme || 'Sans thème'))];
+  const themes = [
+    'Tous les thèmes',
+    ...new Set(source.map(q => q.theme || 'Sans thème'))
+  ];
 
   if (filter && !filter.dataset.ready) {
     filter.innerHTML = themes.map(t => `<option>${t}</option>`).join('');
@@ -164,8 +181,13 @@ function renderQuestions() {
     return matchTheme && matchSearch;
   });
 
-  if (counter) counter.textContent = `${items.length} question${items.length > 1 ? 's' : ''}`;
-  if (sportLabel) sportLabel.textContent = labelSport(activeSport);
+  if (counter) {
+    counter.textContent = `${items.length} question${items.length > 1 ? 's' : ''}`;
+  }
+
+  if (sportLabel) {
+    sportLabel.textContent = labelSport(activeSport);
+  }
 
   if (!items.length) {
     list.innerHTML = `
@@ -196,7 +218,7 @@ function setDeck(mode = 'random') {
 
 function renderFlash() {
   const el = document.getElementById('flashcard');
-  if (!el || !window.QUESTIONS) return;
+  if (!el) return;
 
   const label = document.getElementById('revisionSportLabel');
   const count = document.getElementById('revisionCount');
@@ -205,12 +227,9 @@ function renderFlash() {
 
   const source = getQuestionsBySport(revisionSport);
 
-  if (!deck.length) {
-    deck = shuffle(source).slice(0, 10);
-    idx = 0;
+  if (count) {
+    count.textContent = `${source.length} question${source.length > 1 ? 's' : ''} disponibles`;
   }
-
-  if (count) count.textContent = `${source.length} question${source.length > 1 ? 's' : ''} disponibles`;
 
   if (!source.length) {
     el.innerHTML = `
@@ -220,6 +239,11 @@ function renderFlash() {
       </article>
     `;
     return;
+  }
+
+  if (!deck.length) {
+    deck = shuffle(source).slice(0, 10);
+    idx = 0;
   }
 
   const q = deck[idx];
@@ -234,23 +258,25 @@ function renderFlash() {
     return;
   }
 
+  const safeId = JSON.stringify(q.id);
+
   el.innerHTML = `
     <article class="flash">
       <div class="progress">
         Question ${idx + 1} / ${deck.length} · ${labelSport(q.sport || 'tennis')} · ${q.theme || 'Sans thème'}
       </div>
 
-      <div class="question">${q.q}</div>
+      <div class="question">${q.q || ''}</div>
 
       <button class="ghost" onclick="document.getElementById('flashAnswer').classList.toggle('show')">
         Voir la réponse
       </button>
 
-      <div id="flashAnswer" class="answer">${q.a}</div>
+      <div id="flashAnswer" class="answer">${q.a || ''}</div>
 
       <div class="actions">
-        <button onclick="mark(${q.id}, 'ok'); idx++; renderFlash();">Je savais</button>
-        <button class="secondary" onclick="mark(${q.id}, 'review'); idx++; renderFlash();">À revoir</button>
+        <button onclick='mark(${safeId}, "ok"); idx++; renderFlash();'>Je savais</button>
+        <button class="secondary" onclick='mark(${safeId}, "review"); idx++; renderFlash();'>À revoir</button>
       </div>
     </article>
   `;
@@ -263,7 +289,9 @@ function bindRevision() {
   r.onclick = () => setDeck('random');
 
   const reviewBtn = document.getElementById('reviewBtn');
-  if (reviewBtn) reviewBtn.onclick = () => setDeck('review');
+  if (reviewBtn) {
+    reviewBtn.onclick = () => setDeck('review');
+  }
 
   const resetBtn = document.getElementById('resetBtn');
   if (resetBtn) {
