@@ -1,22 +1,95 @@
-const QUESTIONS = [
-  {id:1, theme:"Avant la partie", q:"Quelles sont les responsabilités de l’arbitre avant son match ?", a:"S’assurer de son affectation, préparer son matériel, récupérer et préparer la feuille d’arbitrage, connaître les règles spécifiques de l’épreuve, suivre l’évolution des parties et arriver de préférence avant les joueurs."},
-  {id:2, theme:"Avant la partie", q:"Que doit faire l’arbitre en arrivant sur le court ?", a:"Vérifier que le court est propre à la compétition, contrôler filet, piquets, chaises, balles, tableau de score, accueillir les joueurs et procéder à la réunion d’avant-match."},
-  {id:3, theme:"Avant la partie", q:"Quelles informations l’arbitre donne-t-il pendant la réunion d’avant-match ?", a:"Format du match, jeu décisif, point décisif éventuel, super jeu décisif, nombre de balles, changements de balles, règles particulières et procédure de tirage au sort."},
-  {id:4, theme:"Avant la partie", q:"Que peut choisir le joueur qui gagne le tirage au sort ?", a:"Servir, relancer, choisir le côté, ou laisser le choix à son adversaire."},
-  {id:5, theme:"Avant la partie", q:"Le joueur qui gagne le tirage au sort peut-il attendre la fin de l’échauffement pour choisir ?", a:"Non. Il doit faire son choix tout de suite."},
-  {id:6, theme:"Avant la partie", q:"Quand une partie commence-t-elle ?", a:"Lorsque le serveur frappe le premier service, ou manque la balle en essayant de la frapper. Le code de conduite s’applique dès l’entrée des joueurs sur le court."},
-  {id:7, theme:"Équipement", q:"Quelle doit être la hauteur du filet au centre ?", a:"0,914 mètre."},
-  {id:8, theme:"Équipement", q:"Si le filet est constaté trop haut après plusieurs jeux, que fait-on ?", a:"Les points joués restent acquis. L’arbitre rectifie immédiatement la hauteur du filet."},
-  {id:9, theme:"Équipement", q:"Quelle doit être la hauteur des poteaux ou piquets de simple ?", a:"1,07 mètre."},
-  {id:10, theme:"Équipement", q:"Où placer les piquets de simple ?", a:"À l’extérieur du court, leur centre à 0,914 m des lignes de côté de simple."},
-  {id:11, theme:"Échauffement", q:"Quelle est la durée de l’échauffement avant une partie ?", a:"5 minutes."},
-  {id:12, theme:"Échauffement", q:"Un joueur peut-il demander des balles d’échauffement au début du deuxième jeu ?", a:"Non. L’échauffement est limité aux 5 minutes précédant le début de la partie."},
-  {id:13, theme:"Échauffement", q:"Quelle est la durée de l’échauffement après une interruption de jeu ?", a:"5 minutes, sauf reprise sur le même court après une interruption inférieure à 15 minutes ou accord des joueurs pour reprendre sans échauffement."},
-  {id:14, theme:"Service", q:"À quel moment un service commence-t-il et finit-il ?", a:"Il commence lorsque le serveur prêt commence son geste. Il finit quand la raquette frappe la balle ou quand le serveur manque la balle en essayant de la frapper."},
-  {id:15, theme:"Service", q:"À partir de quel moment une balle est-elle en jeu ?", a:"Dès qu’elle est frappée par la raquette du serveur."},
-  {id:16, theme:"Service", q:"Le serveur manque la balle en essayant de la frapper. Décision ?", a:"Il y a faute de service."},
-  {id:17, theme:"Service", q:"Après avoir lancé la balle, le serveur la reprend sans essayer de la frapper. Faute ?", a:"Non. Il peut la reprendre ou la laisser tomber s’il n’essaie pas de la frapper."},
-  {id:18, theme:"Service", q:"Le serveur peut-il servir à la cuillère ?", a:"Oui. Il n’a pas besoin de prévenir son adversaire."},
-  {id:19, theme:"Let / gêne", q:"Qu’est-ce qu’un let ?", a:"C’est une décision qui fait rejouer le point en entier."},
-  {id:20, theme:"Let / gêne", q:"Dans quels cas un service est-il let ?", a:"Quand le service touche le filet, la bande ou la sangle puis tombe bon ou touche directement le relanceur ou son partenaire ; ou quand le serveur sert alors que le relanceur n’était pas prêt."}
+// Fichier généré pour le mini-site Révisions JAT1
+// Sources : L’arbitrage en 255 questions (tennis, FFT 2020)
+// + 255 notions sur l’arbitrage du Beach Tennis (avril 2025)
+
+const TENNIS_QUESTIONS = [
+  {
+    id: 1,
+    sport: "tennis",
+    theme: "Avant la partie",
+    niveau: "JAT1",
+    q: "Quelles sont les responsabilités de l’arbitre avant son match ?",
+    a: "S’assurer de son affectation, informer le juge-arbitre ou le chef des arbitres d’éventuels problèmes, connaître la procédure d’appel du match, préparer son matériel, se munir des balles, récupérer et préparer la feuille d’arbitrage, connaître les règles spécifiques de l’épreuve, suivre l’évolution des parties et arriver de préférence avant les joueurs."
+  },
+  {
+    id: 2,
+    sport: "tennis",
+    theme: "Avant la partie",
+    niveau: "JAT1",
+    q: "Que doit faire l’arbitre en arrivant sur le court ?",
+    a: "S’assurer que le court est propre à la compétition, nettoyer les bancs, vérifier les balles, placer les piquets de simple sauf en double, vérifier le filet, la sangle, les chaises, le tableau de score, accueillir les joueurs, contrôler les tenues et procéder à la réunion d’avant-match puis au tirage au sort."
+  },
+  {
+    id: 3,
+    sport: "tennis",
+    theme: "Avant la partie",
+    niveau: "JAT1",
+    q: "Quelles informations l’arbitre donne-t-il aux joueurs pendant la réunion d’avant-match ?",
+    a: "Le format du match, le jeu décisif, le point décisif éventuel, le super jeu décisif éventuel, le nombre de balles, les changements de balles, les règles particulières, la procédure d’inspection de trace, les juges de ligne, les outils électroniques éventuels et l’obligation de désactiver les appareils électroniques."
+  },
+  {
+    id: 4,
+    sport: "tennis",
+    theme: "Avant la partie",
+    niveau: "JAT1",
+    q: "Que peut choisir le joueur qui gagne le tirage au sort ?",
+    a: "Il peut choisir de servir, de relancer, de choisir le côté, ou de laisser le choix à son adversaire."
+  },
+  {
+    const BEACH_TENNIS_QUESTIONS = [
+  {
+    id: 1001,
+    sport: "beach_tennis",
+    theme: "Règles générales",
+    niveau: "JAT1",
+    q: "Quelle est la hauteur du filet en beach tennis ?",
+    a: "1,70 m pour les adultes."
+  },
+  {
+    id: 1002,
+    sport: "beach_tennis",
+    theme: "Règles générales",
+    niveau: "JAT1",
+    q: "Le beach tennis se joue-t-il avec rebond ?",
+    a: "Non. La balle ne doit jamais rebondir au sol."
+  },
+  {
+    id: 1003,
+    sport: "beach_tennis",
+    theme: "Service",
+    niveau: "JAT1",
+    q: "Le serveur a-t-il droit à une deuxième balle ?",
+    a: "Non. Il n’y a qu’une seule balle de service."
+  },
+  {
+    id: 1004,
+    sport: "beach_tennis",
+    theme: "Service",
+    niveau: "JAT1",
+    q: "Le service peut-il être frappé par-dessous ?",
+    a: "Oui."
+  },
+  {
+    id: 1005,
+    sport: "beach_tennis",
+    theme: "Score",
+    niveau: "JAT1",
+    q: "Le point décisif est-il utilisé en beach tennis ?",
+    a: "Oui, généralement à 40A."
+  }
 ];
+
+// Fusion des questions
+const QUESTIONS = [
+  ...TENNIS_QUESTIONS,
+  ...BEACH_TENNIS_QUESTIONS
+];
+    id: 5,
+    sport: "tennis",
+    theme: "Avant la partie",
+    niveau: "JAT1",
+    q: "Le joueur qui gagne le tirage au sort peut-il attendre la fin de l’échauffement pour faire son choix ?",
+    a: "Non. Il doit faire son choix immédiatement."
+  }
+];
+
